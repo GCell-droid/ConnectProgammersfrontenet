@@ -1,20 +1,28 @@
 import  { useState } from 'react'
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/userSlice';
+import {BASE_URL} from '../utils/constants'
+import { useNavigate } from 'react-router';
 const Login = () => {
   const [emailId,setemailId] = useState("nitesh@gmail.com");
   const [firstName,setFirstName] = useState("");
   const [gender,setGender] = useState("male");
-  const [photoURL,setPhotoURL] = useState("");
+  const [photoURL,setPhotoURL] = useState("https://images.unsplash.com/photo-1497316730643-415fac54a2af?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHRha2luZyUyMHBob3RvfGVufDB8fDB8fHww");
   const [password,setpassword] = useState("Nitesh@123");
   const [isSignIn,setSignIn] = useState(true);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleLogin = async ()=>{
     //to get cookie
-    const res = await axios.post('http://localhost:7777/login',{emailId,password},{withCredentials:true});
-    console.log(res.data);
+    const res = await axios.post(BASE_URL+'/login',{emailId,password},{withCredentials:true});
+    dispatch(addUser(res.data))
+    navigate('/')
   }
   const handleSignUp = async()=>{
-    const res = await axios.post('http://localhost:7777/signup',{emailId,password,firstName,photoURL,gender})
-    console.log(res)
+    const res = await axios.post(BASE_URL+'/signup',{emailId,password,firstName,photoURL,gender})
+    dispatch(addUser(res.data))
+    navigate('/')
   }
 
   return (

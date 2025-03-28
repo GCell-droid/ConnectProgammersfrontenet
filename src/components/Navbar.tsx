@@ -1,10 +1,19 @@
 import React from 'react'
 import ThemeToggle from './ToggleTheme'
-
+import { useDispatch, useSelector } from 'react-redux'
+import axios from 'axios'
+import { removeUser } from '../utils/userSlice';
+import {BASE_URL} from '../utils/constants'
 const Navbar = () => {
+  const user = useSelector((store:any)=>store.user)
+  const dispatch = useDispatch();
+  const handleLogout = async ()=>{
+    const res = await axios.post(BASE_URL+"/logout",{},{withCredentials:true}) 
+    dispatch(removeUser())
+    console.log("Logout"+res)
+  }
   return (
      <>
-     
        <div className="navbar bg-base-100 shadow-sm ">
   <div className="flex-1">
 
@@ -12,8 +21,8 @@ const Navbar = () => {
   </div>
   
           
-  <div className="flex-none mr-8 ">
       <ThemeToggle  />
+  {user&&(<div className="flex-none mr-8 ">
     <div className="dropdown dropdown-end mr-4 ml-4">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
         <div className="indicator">
@@ -38,7 +47,7 @@ const Navbar = () => {
         <div className="w-10 rounded-full">
           <img
             alt="Tailwind CSS Navbar component"
-            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+            src={user?.photoUrl} />
         </div>
       </div>
       
@@ -52,11 +61,11 @@ const Navbar = () => {
           </a>
         </li>
         <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+        <li onClick={handleLogout}><a>Logout</a></li>
         
       </ul>
     </div>
-  </div>
+  </div>)}
   
 </div>
     </>
