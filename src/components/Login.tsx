@@ -1,6 +1,6 @@
 import  { useState } from 'react'
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 import {BASE_URL} from '../utils/constants'
 import { useNavigate } from 'react-router';
@@ -12,6 +12,7 @@ const Login = () => {
   const [password,setpassword] = useState("Nitesh@123");
   const [isSignIn,setSignIn] = useState(true);
   const navigate = useNavigate();
+  const user = useSelector((store:any)=>store.user);
   const dispatch = useDispatch();
   const handleLogin = async ()=>{
     //to get cookie
@@ -24,7 +25,8 @@ const Login = () => {
     dispatch(addUser(res.data))
     navigate('/')
   }
-
+  if(user)
+    navigate('/')
   return (
     isSignIn?
     <div className='flex justify-center my-20'>

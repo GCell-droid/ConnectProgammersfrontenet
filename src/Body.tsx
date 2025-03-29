@@ -2,16 +2,30 @@ import Navbar from './components/Navbar'
 import {  Outlet, useNavigate} from 'react-router'
 import Footer from './components/Footer'
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import {BASE_URL} from './utils/constants'
+import { addUser } from './utils/userSlice';
 const Body = () => {
   const navigate = useNavigate()
   const user = useSelector((store:any)=>store.user)
-  useEffect(() => {
-    if (!user) {
-      navigate("/login"); // Redirect to login if user is null
+  const dispatch = useDispatch();
+  const handleGetUser = async ()=>{
+    try{
+      if(!user){
+        //there is no data in store
+        const res = await axios.get(BASE_URL+'/profile/view',{withCredentials:true})
+        dispatch(addUser(res.data))
+      }
+    }catch(err){
+      if(err.status==401){
+        navigate('/login')
+      }
     }
-  }, [user, navigate]);
+  }
+  useEffect(() => {
+    handleGetUser();
+  },[]);
   return (
    <>
    <Navbar/>
