@@ -5,18 +5,24 @@ import Login from './components/Login'
 // import Profile from './components/Profile'
 import { Provider } from 'react-redux'
 import appStore from './utils/appStore'
-import Feed from './components/feed'
 import Profile from './components/Profile'
+import Feed from './components/Feed'
+import Error from './components/Error'
+import Connections from './components/Connections'
+import Request from './components/Request'
+
 function App() {
   return (
     <Provider store={appStore}>
     <BrowserRouter basename='/'>
       <Routes>
         <Route path='/' element={<Body/>}> 
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/profile' element={<Profile/>}/>
-        <Route path='/feed' element={<Feed/>}/>
-        {/* <Route path='/profile' element={<Profile/>}/> */}
+          <Route path='/' element={<Feed/>}/> 
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/profile' element={<Profile/>}/>
+          <Route path='/connections' element={<Connections/>}/>
+          <Route path='/requests' element={<Request/>}/>
+          <Route path='/error' element={<Error/>}/>
         </Route>
       </Routes>
       </BrowserRouter>
