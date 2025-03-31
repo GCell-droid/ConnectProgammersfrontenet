@@ -10,11 +10,14 @@ import AlertComp from "./AlertComp";
 const Profile = () => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
-  const [isSuccess,setisSuccess] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false);
   const [firstname, setFirstName] = useState(user?.firstName || "");
-  const [skill, setSkills] = useState(user?.skills || "");
+  const [skill, setSkills] = useState(Array.isArray(user?.skills) ? user.skills : []);
   const [gender, setGender] = useState(user?.gender || "male");
-  const [photoURL, setPhotoURL] = useState(user?.photoUrl || "https://static.vecteezy.com/system/resources/previews/045/944/199/non_2x/male-default-placeholder-avatar-profile-gray-picture-isolated-on-background-man-silhouette-picture-for-user-profile-in-social-media-forum-chat-greyscale-illustration-vector.jpg");
+  const [photoURL, setPhotoURL] = useState(
+    user?.photoUrl ||
+      "https://static.vecteezy.com/system/resources/previews/045/944/199/non_2x/male-default-placeholder-avatar-profile-gray-picture-isolated-on-background-man-silhouette-picture-for-user-profile-in-social-media-forum-chat-greyscale-illustration-vector.jpg"
+  );
   const [age, setAge] = useState(user?.age || "");
   const [description, setDescription] = useState(user?.description || "");
   const [error, setError] = useState("");
@@ -26,22 +29,22 @@ const Profile = () => {
         {
           firstName: firstname,
           skills: skill,
-          gender:gender,
-          age:age,
-          description:description,
+          gender: gender,
+          age: age,
+          description: description,
           photoUrl: photoURL,
         },
         { withCredentials: true }
       );
       dispatch(addUser(res?.data?.user)); // Update Redux store
-      setisSuccess(true)
-      setTimeout(()=>{
-        setisSuccess(false)
-      },2000)
+      setIsSuccess(true);
+      setTimeout(() => {
+        setIsSuccess(false);
+      }, 2000);
       setError(""); // Clear error on success
     } catch (err) {
-      setError(err.response.data);
-      setisSuccess(false)
+      setError(err.response?.data || "An error occurred. Please try again.");
+      setIsSuccess(false);
     }
   };
 
@@ -49,21 +52,20 @@ const Profile = () => {
 
   return (
     <div className="md:flex  justify-center mt-10 ">
-      {isSuccess&&<AlertComp message={"Update Success"}/>}
+      {isSuccess && <AlertComp message={"Update Success"} />}
       {/* Profile Card */}
       <div className="my-4">
-
-      <NewFeedCard
-        user={{
-          firstName: firstname,
-          skills: skill,
-          gender,
-          age,
-          description,
-          photoUrl: photoURL,
-        }}
+        <NewFeedCard
+          user={{
+            firstName: firstname,
+            skills: skill,
+            gender,
+            age,
+            description,
+            photoUrl: photoURL,
+          }}
         />
-        </div>
+      </div>
 
       {/* Profile Form */}
       <div className="flex justify-center ml-8 my-4">
@@ -103,8 +105,8 @@ const Profile = () => {
           <label className="fieldset-legend">Skills</label>
           <input
             type="text"
-            onChange={(e) => setSkills(e.target.value)}
-            value={skill}
+            onChange={(e) => setSkills(e.target.value.split(" "))}
+            value={skill.join(" ")}
             className="input"
             placeholder="Skills"
           />

@@ -20,6 +20,7 @@ const Feed = () => {
       console.error(err)
     }
   }
+  
   useEffect(()=>{
     handleFeed();
   },[])

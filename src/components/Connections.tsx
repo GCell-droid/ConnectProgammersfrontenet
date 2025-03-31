@@ -7,6 +7,7 @@ import Loading from './Loading'
 const Connections = () => {
     const dispatch = useDispatch();
     const connections = useSelector((store:any)=>store.connections)
+    
     const getConnection = async ()=>{
         const res = await axios.get(BASE_URL+'/user/connections',{withCredentials:true});
         console.log(res?.data?.filteredData)

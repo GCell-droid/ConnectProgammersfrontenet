@@ -63,7 +63,7 @@ const Login = () => {
   <label className="fieldset-legend">Name</label>
   <input  onChange={e=>setFirstName(e.target.value)} value={firstName}className="input" placeholder="Name" />
 <label htmlFor="gender-select" className="fieldset-legend">Gender</label>
-      <select 
+      <select title='gender' 
         value={gender}
         onChange={(e) => setGender(e.target.value)}
         className="select select-primary"
@@ -83,7 +83,8 @@ const Login = () => {
   }}>Already User Login Here...</button>
   <p className='text-red-600'>{error}</p>
   <button className="btn btn-accent mt-2" onClick={handleSignUp}>Signup</button>
-</fieldset></div>
+</fieldset>
+</div>
   )
 }
 

@@ -8,7 +8,8 @@ import {BASE_URL} from '../utils/constants'
 import { Link, useNavigate } from 'react-router';
 const Navbar = () => {
   const user = useSelector((store:any)=>store.user)
-  const feed = useSelector((store:any)=>store.feed)
+  const connectionsLength = useSelector((store:any)=>store?.connections?.length)
+  const requestLength = useSelector((store:any)=>store?.requests?.length)
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const handleLogout = async ()=>{
@@ -33,7 +34,7 @@ const Navbar = () => {
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
         <div className="indicator text-2xl">
           &
-          <span className="badge indicator-item border-none bg-blue-500 ">{feed?.length}</span>
+          <span className="badge indicator-item border-none bg-blue-500 ">{requestLength?requestLength:0}</span>
         </div>
       </div>
       </Link>
@@ -59,7 +60,8 @@ const Navbar = () => {
             Profile
           </Link>
         </li>
-        <li><Link to='/connections'>Connections</Link></li>
+        <li><Link to='/connections'>Connections <span className="badge ">{connectionsLength}</span></Link>
+        </li>
         <li onClick={handleLogout}><a>Logout</a></li>
         
       </ul>

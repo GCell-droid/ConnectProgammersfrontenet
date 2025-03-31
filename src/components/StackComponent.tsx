@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import NewFeedCard from './NewFeedCard';
 
-const StackComponent = ({feed}) => {
+const StackComponent = ({feed,handleFeed}) => {
   return (
     <div className='flex justify-center mt-10'>
     <div className="stack gap-4  ">
            {feed.map((user:any) => {
-      return <NewFeedCard user={user}/>
+      return <NewFeedCard user={user} />
 })}
 
            
