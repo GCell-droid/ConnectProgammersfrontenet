@@ -10,7 +10,6 @@ const Connections = () => {
     
     const getConnection = async ()=>{
         const res = await axios.get(BASE_URL+'/user/connections',{withCredentials:true});
-        console.log(res?.data?.filteredData)
         dispatch(addConnections(res?.data?.filteredData));
     }
     useEffect(()=>{

@@ -21,6 +21,7 @@ const Body = () => {
       if(err.status==401){
         navigate('/login')
       }
+      // navigate('/error', { state: { message: err.message } });
     }
   }
   useEffect(() => {

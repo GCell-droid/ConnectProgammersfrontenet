@@ -23,6 +23,7 @@ function App() {
           <Route path='/connections' element={<Connections/>}/>
           <Route path='/requests' element={<Request/>}/>
           <Route path='/error' element={<Error/>}/>
+          <Route path='*' element={<Error message={"Page Not Found"}/>}/>
         </Route>
       </Routes>
       </BrowserRouter>

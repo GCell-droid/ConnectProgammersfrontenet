@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../utils/constants";
 import NewFeedCard from "./NewFeedCard";
@@ -8,20 +8,27 @@ import { addUser } from "../utils/userSlice";
 import AlertComp from "./AlertComp";
 
 const Profile = () => {
-  const user = useSelector((store) => store.user);
+  const user =   useSelector((store) => store?.user);
   const dispatch = useDispatch();
   const [isSuccess, setIsSuccess] = useState(false);
   const [firstname, setFirstName] = useState(user?.firstName || "");
   const [skill, setSkills] = useState(Array.isArray(user?.skills) ? user.skills : []);
   const [gender, setGender] = useState(user?.gender || "male");
-  const [photoURL, setPhotoURL] = useState(
+  const [photoUrl, setPhotoURL] = useState(
     user?.photoUrl ||
       "https://static.vecteezy.com/system/resources/previews/045/944/199/non_2x/male-default-placeholder-avatar-profile-gray-picture-isolated-on-background-man-silhouette-picture-for-user-profile-in-social-media-forum-chat-greyscale-illustration-vector.jpg"
   );
   const [age, setAge] = useState(user?.age || "");
   const [description, setDescription] = useState(user?.description || "");
   const [error, setError] = useState("");
-
+  useEffect(()=>{
+    setFirstName(user?.firstName);
+        setSkills(Array.isArray(user?.skills) ? user?.skills : []);
+        setGender(user?.gender || "male");
+        setPhotoURL(user?.photoUrl || "");
+        setAge(user?.age || "");
+        setDescription(user?.description || "");
+  },[user])
   const saveProfile = async () => {
     try {
       const res = await axios.patch(
@@ -32,7 +39,7 @@ const Profile = () => {
           gender: gender,
           age: age,
           description: description,
-          photoUrl: photoURL,
+          photoUrl: photoUrl,
         },
         { withCredentials: true }
       );
@@ -62,7 +69,7 @@ const Profile = () => {
             gender,
             age,
             description,
-            photoUrl: photoURL,
+            photoUrl: photoUrl,
           }}
         />
       </div>
@@ -125,7 +132,7 @@ const Profile = () => {
           <input
             type="text"
             onChange={(e) => setPhotoURL(e.target.value)}
-            value={photoURL}
+            value={photoUrl}
             className="input"
             placeholder="Photo URL"
           />

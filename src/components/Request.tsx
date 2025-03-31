@@ -25,7 +25,7 @@ const Request = () => {
         getRequest();
 
       }catch(err){
-        <Error error={err}/>
+        <Error message={err.message}/>
       }
     }
     const rejectRequest = async(reqId)=>{

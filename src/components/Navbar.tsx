@@ -6,6 +6,7 @@ import { removeUser } from '../utils/userSlice';
 import { removeFeed } from '../utils/feedSlice';
 import {BASE_URL} from '../utils/constants'
 import { Link, useNavigate } from 'react-router';
+import Error from './Error';
 const Navbar = () => {
   const user = useSelector((store:any)=>store.user)
   const connectionsLength = useSelector((store:any)=>store?.connections?.length)
@@ -13,10 +14,14 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const handleLogout = async ()=>{
-    await axios.post(BASE_URL+"/logout",{},{withCredentials:true}) 
-    dispatch(removeUser())
-    dispatch(removeFeed());
-    navigate('/login')
+    try{
+      await axios.post(BASE_URL+"/logout",{},{withCredentials:true}) 
+      dispatch(removeUser())
+      dispatch(removeFeed());
+      navigate('/login')
+    }catch(err){
+      <Error message={err?.message}/>
+    }
   }
   return (
      <>

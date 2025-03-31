@@ -30,21 +30,22 @@ const Login = () => {
   }
   const handleSignUp = async()=>{
     try{
-      const res = await axios.post(BASE_URL+'/signup',{emailId,password,firstName,photoURL,gender})
-      setsuccessSignup(true)
       setError("")
+      const res = await axios.post(BASE_URL+'/signup',{emailId,password,firstName,photoURL,gender},{withCredentials:true})
+      setsuccessSignup(true)
+      dispatch(addUser(res.data))
       setSignIn(!isSignIn)
+      navigate('/profile')
     }catch(err){
       setError(err?.response?.data||"Something Went Wrong")
     }
   }
-  if(user)
-   return navigate('/')
+  
   return (
     isSignIn?
     <div className='flex justify-center my-20'>
     <fieldset className="fieldset w-xs bg-base-200 border border-base-300 p-6 rounded-box ">
-      {successSignup&&<AlertComp message={"SignUp Success!! Please Login"}/>}
+      {successSignup&&<AlertComp message={"SignUp Success"}/>}
   <label className="font-bold text-center text-2xl -my-1.5 mb-2">Login</label>
   <label className="fieldset-legend">Email</label>
   <input type="email"  onChange={e=>setemailId(e.target.value)} value={emailId}className="input" placeholder="Email" />
@@ -58,6 +59,7 @@ const Login = () => {
   <button className="btn btn-accent mt-2" onClick={handleLogin}>Login</button>
 </fieldset></div>:
    <div className='flex justify-center my-4'>
+      {successSignup&&<AlertComp message={"Login Success"}/>}
    <fieldset className="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box ">
   <label className="font-bold text-center text-2xl -my-1.5 mb-2">Signup</label>
   <label className="fieldset-legend">Name</label>
@@ -75,8 +77,6 @@ const Login = () => {
   <input type="email" className="input" value={emailId}  onChange={e=>setemailId(e.target.value)}placeholder="Email Id" />
   <label className="fieldset-legend">Password</label>
   <input type="password" className="input" value={password}  onChange={e=>setpassword(e.target.value)}placeholder="Password" />
-  <label className="fieldset-legend">PhotoURL</label>
-  <input  onChange={e=>setPhotoURL(e.target.value)} value={photoURL}className="input" placeholder="Photo" />
   <button className="fieldset-legend " onClick={()=>{
     setError("")
     setSignIn(!isSignIn)
