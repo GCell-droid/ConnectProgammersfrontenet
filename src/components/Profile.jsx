@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BASE_URL } from "../utils/constants";
-import NewFeedCard from "./NewFeedCard";
-import Loading from "./Loading";
-import { addUser } from "../utils/userSlice";
-import AlertComp from "./AlertComp";
+import { BASE_URL } from "../utils/constants.js";
+import NewFeedCard from "./NewFeedCard.jsx";
+import Loading from "./Loading.jsx";
+import { addUser } from "../utils/userSlice.js";
+import AlertComp from "./AlertComp.jsx";
 
 const Profile = () => {
   const user =   useSelector((store) => store?.user);

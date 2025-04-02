@@ -6,7 +6,7 @@ import {addConnections} from '../utils/connectionSlice'
 import Loading from './Loading'
 const Connections = () => {
     const dispatch = useDispatch();
-    const connections = useSelector((store:any)=>store.connections)
+    const connections = useSelector((store)=>store.connections)
     
     const getConnection = async ()=>{
         const res = await axios.get(BASE_URL+'/user/connections',{withCredentials:true});
@@ -37,7 +37,7 @@ const Connections = () => {
       <div className="text-xs uppercase font-semibold opacity-60 text-accent mr-4">Age: {age}</div>
       {skills && skills.length > 0&&<div className="text-xs uppercase font-semibold opacity-60 mr-2">Skills: </div>}
       {skills && skills.length > 0 ? (
-     skills.map((s: string, index: number) => (
+     skills.map((s, index) => (
       <div className='flex'>
       <div key={index} className="kbd p-2 -mt-1">{s}</div>
       </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 const ShimmerFeedCard = () => {
   return (
-    <div className="card w-full sm:w-80 md:w-96 mx-auto overflow-hidden transition-all duration-300
+    <div className="card w-full mt-10 sm:w-80 md:w-96 mx-auto overflow-hidden transition-all duration-300
       bg-gradient-to-br shadow-lg rounded-2xl flex flex-col">
       
       {/* Shimmer Profile Image */}

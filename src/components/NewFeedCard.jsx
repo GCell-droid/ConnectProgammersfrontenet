@@ -15,11 +15,9 @@ const NewFeedCard = ({ user }) => {
         detail: { userId, action: status }
       }));
       dispatch(handleFeed(userId));
-      axios.post(`${BASE_URL}/request/${status}/${userId}`, {}, { withCredentials: true })
-        .catch(err => console.error('API error:', err));
+      axios.post(`${BASE_URL}/request/${status}/${userId}`, {}, { withCredentials: true });
       
     } catch (err) {
-      // console.error(err);
       <Error message={err?.message}/>
     }
   };

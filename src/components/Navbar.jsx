@@ -8,9 +8,9 @@ import {BASE_URL} from '../utils/constants'
 import { Link, useNavigate } from 'react-router';
 import Error from './Error';
 const Navbar = () => {
-  const user = useSelector((store:any)=>store.user)
-  const connectionsLength = useSelector((store:any)=>store?.connections?.length)
-  const requestLength = useSelector((store:any)=>store?.requests?.length)
+  const user = useSelector((store)=>store.user)
+  const connectionsLength = useSelector((store)=>store?.connections?.length)
+  const requestLength = useSelector((store)=>store?.requests?.length)
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const handleLogout = async ()=>{
@@ -28,7 +28,8 @@ const Navbar = () => {
        <div className="navbar bg-base-100 shadow-sm ">
   <div className="flex-1">
 
-    <Link to='/' className="btn btn-ghost text-xl">DevConnect</Link>
+    <Link to={user ? '/' : '/login'} className="btn btn-ghost text-xl">DevConnect</Link>
+
   </div>
   
           

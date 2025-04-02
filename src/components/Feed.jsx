@@ -10,7 +10,7 @@ import Error from "./Error";
 
 const Feed = () => {
   const dispatch = useDispatch();
-  const feed = useSelector((store:any)=>store.feed);
+  const feed = useSelector((store)=>store.feed);
   const handleFeed = async()=>{
     try{
       if(!feed){

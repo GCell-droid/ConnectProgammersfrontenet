@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import NewFeedCard from './NewFeedCard';
+import NewFeedCard from './NewFeedCard.jsx';
 import { useSelector } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
 

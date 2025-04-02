@@ -8,7 +8,7 @@ import {BASE_URL} from './utils/constants'
 import { addUser } from './utils/userSlice';
 const Body = () => {
   const navigate = useNavigate()
-  const user = useSelector((store:any)=>store.user)
+  const user = useSelector((store)=>store.user)
   const dispatch = useDispatch();
   const handleGetUser = async ()=>{
     try{
