@@ -7,6 +7,7 @@ import axios from 'axios';
 import {BASE_URL} from './utils/constants'
 import { addUser } from './utils/userSlice';
 const Body = () => {
+
   const navigate = useNavigate()
   const user = useSelector((store)=>store.user)
   const dispatch = useDispatch();
@@ -21,7 +22,6 @@ const Body = () => {
       if(err.status==401){
         navigate('/login')
       }
-      // navigate('/error', { state: { message: err.message } });
     }
   }
   useEffect(() => {
