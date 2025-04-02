@@ -6,11 +6,11 @@ import {BASE_URL} from '../utils/constants'
 import { useNavigate } from 'react-router';
 import AlertComp from './AlertComp';
 const Login = () => {
-  const [emailId,setemailId] = useState("nitesh@gmail.com");
+  const [emailId,setemailId] = useState("");
   const [firstName,setFirstName] = useState("");
   const [gender,setGender] = useState("male");
   const [photoURL,setPhotoURL] = useState("https://images.unsplash.com/photo-1497316730643-415fac54a2af?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHRha2luZyUyMHBob3RvfGVufDB8fDB8fHww");
-  const [password,setpassword] = useState("Nitesh@123");
+  const [password,setpassword] = useState("");
   const [isSignIn,setSignIn] = useState(true);
   const [error,setError] = useState("");
   const [successSignup,setsuccessSignup] = useState(false)
