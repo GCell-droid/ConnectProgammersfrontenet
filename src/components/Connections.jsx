@@ -4,10 +4,10 @@ import {BASE_URL} from '../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import {addConnections} from '../utils/connectionSlice'
 import Loading from './Loading'
+import { Link } from 'react-router'
 const Connections = () => {
     const dispatch = useDispatch();
     const connections = useSelector((store)=>store.connections)
-    
     const getConnection = async ()=>{
         const res = await axios.get(BASE_URL+'/user/connections',{withCredentials:true});
         dispatch(addConnections(res?.data?.filteredData));
@@ -22,13 +22,12 @@ const Connections = () => {
     return (
       <div className=' m-auto mt-10 shadow-lg shadow-black rounded-lg p-4'>
       <ul className="list bg-base-100 rounded-box shadow-md">
-
   <li className="p-4 pb-2 text-4xl opacity-60 tracking-wide text-center mb-5">Connections</li>
   <div className='  ml-10'>
 
   {connections.map((connection)=>{
     const {_id, photoUrl, firstName, skills, gender, age, description } = connection;
-    return <li id={_id} className="list-row">
+    return <li key={_id} className="list-row">
     <div><img className="size-10 rounded-box" src={photoUrl}/></div>
     <div>
       <div>{firstName}</div>
@@ -38,8 +37,8 @@ const Connections = () => {
       {skills && skills.length > 0&&<div className="text-xs uppercase font-semibold opacity-60 mr-2">Skills: </div>}
       {skills && skills.length > 0 ? (
      skills.map((s, index) => (
-      <div className='flex'>
-      <div key={index} className="kbd p-2 -mt-1">{s}</div>
+      <div className='flex' key={s}>
+      <div className="kbd p-2 -mt-1">{s}</div>
       </div>
   ))
 ) : (
@@ -52,6 +51,13 @@ const Connections = () => {
     <p className="list-col-wrap text-xs">
     {description}
     </p>
+    <div className='flex sm:flex-col lg:flex-row'>
+      <Link to={'/chat/'+_id}>
+    <button className="btn btn-accent mt-2">
+      Chat
+    </button>
+      </Link>
+    </div>
   </li>
   })}
   

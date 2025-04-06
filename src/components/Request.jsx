@@ -16,7 +16,7 @@ const Request = () => {
     }
     const acceptRequest = async(reqId)=>{
       try{
-        const res = await axios.post(BASE_URL+'/request/review/accepted/'+reqId,{},{withCredentials:true})
+        await axios.post(BASE_URL+'/request/review/accepted/'+reqId,{},{withCredentials:true})
         setisAccepted(true)
         setTimeout(() => {
           setisAccepted(false)
@@ -28,7 +28,7 @@ const Request = () => {
       }
     }
     const rejectRequest = async(reqId)=>{
-       const res = await axios.post(BASE_URL+'/request/review/rejected/'+reqId,{},{withCredentials:true})
+      await axios.post(BASE_URL+'/request/review/rejected/'+reqId,{},{withCredentials:true})
       getRequest();
     }
     useEffect(()=>{
@@ -48,7 +48,7 @@ const Request = () => {
   {request?.map((requestUser)=>{
     const reqId = requestUser?._id;
     const {_id, photoUrl, firstName, skills, gender, age, description } = requestUser?.fromUserId;
-    return <li id={_id} className="list-row">
+    return <li key={_id} className="list-row">
     <div><img className="size-10 rounded-box" src={photoUrl}/></div>
     <div>
       <div>{firstName}</div>
