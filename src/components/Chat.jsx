@@ -114,7 +114,6 @@ const Chat = () => {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input Section */}
         <div className="flex items-center gap-2 p-3 bg-base-300 dark:bg-base-200 rounded-b-xl">
           <input
             type="text"
