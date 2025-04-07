@@ -3,8 +3,8 @@
 Welcome to **DevConnect**, a dynamic matchmaking platform exclusively designed for developers and tech enthusiasts to discover, connect, and collaborate based on shared skills and interests. Think Tinder for developers — but smarter! 🚀
 
 🌐 Live at: [http://13.61.7.169/](http://13.61.7.169/)  
-🔗 Frontend Repo: [ConnectProgrammersfrontend](https://github.com/GCell-droid/ConnectProgammersfrontenet)  
-🔗 Backend Repo: [CodeConnect](https://github.com/GCell-droid/CodeConnect)
+🔗 Frontend Repo: [DevConnectFrontened](https://github.com/GCell-droid/ConnectProgammersfrontenet)  
+🔗 Backend Repo: [DevConnectBackened](https://github.com/GCell-droid/CodeConnect)
 
 ---
 
