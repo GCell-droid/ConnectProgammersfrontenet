@@ -15,7 +15,6 @@ const Login = () => {
   const [error,setError] = useState("");
   const [successSignup,setsuccessSignup] = useState(false)
   const navigate = useNavigate();
-  const user = useSelector((store)=>store.user);
   const dispatch = useDispatch();
   
   const handleLogin = async ()=>{
