@@ -8,27 +8,31 @@ import { addUser } from "../utils/userSlice.js";
 import AlertComp from "./AlertComp.jsx";
 
 const Profile = () => {
-  const user =   useSelector((store) => store?.user);
+  const user = useSelector((store) => store?.user);
   const dispatch = useDispatch();
   const [isSuccess, setIsSuccess] = useState(false);
   const [firstname, setFirstName] = useState(user?.firstName || "");
-  const [skill, setSkills] = useState(Array.isArray(user?.skills) ? user.skills : []);
+  const [skill, setSkills] = useState(
+    Array.isArray(user?.skills) ? user.skills : []
+  );
   const [gender, setGender] = useState(user?.gender || "male");
   const [photoUrl, setPhotoURL] = useState(
     user?.photoUrl ||
       "https://static.vecteezy.com/system/resources/previews/045/944/199/non_2x/male-default-placeholder-avatar-profile-gray-picture-isolated-on-background-man-silhouette-picture-for-user-profile-in-social-media-forum-chat-greyscale-illustration-vector.jpg"
   );
   const [age, setAge] = useState(user?.age || "");
-  const [description, setDescription] = useState(user?.description || "");
+  const [description, setDescription] = useState(
+    user?.description || ""
+  );
   const [error, setError] = useState("");
-  useEffect(()=>{
+  useEffect(() => {
     setFirstName(user?.firstName);
-        setSkills(Array.isArray(user?.skills) ? user?.skills : []);
-        setGender(user?.gender || "male");
-        setPhotoURL(user?.photoUrl || "");
-        setAge(user?.age || "");
-        setDescription(user?.description || "");
-  },[user])
+    setSkills(Array.isArray(user?.skills) ? user?.skills : []);
+    setGender(user?.gender || "male");
+    setPhotoURL(user?.photoUrl || "");
+    setAge(user?.age || "");
+    setDescription(user?.description || "");
+  }, [user]);
   const saveProfile = async () => {
     try {
       const res = await axios.patch(
@@ -50,7 +54,9 @@ const Profile = () => {
       }, 2000);
       setError(""); // Clear error on success
     } catch (err) {
-      setError(err.response?.data || "An error occurred. Please try again.");
+      setError(
+        err.response?.data || "An error occurred. Please try again."
+      );
       setIsSuccess(false);
     }
   };
@@ -77,7 +83,9 @@ const Profile = () => {
       {/* Profile Form */}
       <div className="flex justify-center ml-8 my-4">
         <fieldset className="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
-          <label className="font-bold text-center text-2xl mb-2">Profile</label>
+          <label className="font-bold text-center text-2xl mb-2">
+            Profile
+          </label>
 
           <label className="fieldset-legend">Name</label>
           <input
@@ -139,7 +147,10 @@ const Profile = () => {
 
           {error && <p className="text-red-600">{error}</p>}
 
-          <button className="btn btn-accent mt-2" onClick={saveProfile}>
+          <button
+            className="btn btn-accent mt-2"
+            onClick={saveProfile}
+          >
             Save
           </button>
         </fieldset>
