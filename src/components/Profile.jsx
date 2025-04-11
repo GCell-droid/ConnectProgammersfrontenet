@@ -51,10 +51,10 @@ const Profile = () => {
       );
       dispatch(addUser(res?.data?.user)); // Update Redux store
       setIsSuccess(true);
-      navigate("/");
       setTimeout(() => {
         setIsSuccess(false);
-      }, 2000);
+        navigate("/");
+      }, 1000);
       setError(""); // Clear error on success
     } catch (err) {
       setError(
