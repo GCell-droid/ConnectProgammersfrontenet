@@ -6,9 +6,11 @@ import NewFeedCard from "./NewFeedCard.jsx";
 import Loading from "./Loading.jsx";
 import { addUser } from "../utils/userSlice.js";
 import AlertComp from "./AlertComp.jsx";
+import { useNavigate } from "react-router";
 
 const Profile = () => {
   const user = useSelector((store) => store?.user);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isSuccess, setIsSuccess] = useState(false);
   const [firstname, setFirstName] = useState(user?.firstName || "");
@@ -49,6 +51,7 @@ const Profile = () => {
       );
       dispatch(addUser(res?.data?.user)); // Update Redux store
       setIsSuccess(true);
+      navigate("/");
       setTimeout(() => {
         setIsSuccess(false);
       }, 2000);
